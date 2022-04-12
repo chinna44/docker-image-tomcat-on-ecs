@@ -12,4 +12,4 @@ COPY ./index.html /opt/software/tomcat/webapps/ROOT/
 COPY ./target/giridhar.war /opt/software/tomcat/webapps/
 RUN chmod -R 777 /opt/software/tomcat/bin/startup.sh
 EXPOSE 8080
-ENTRYPOINT  /opt/software/tomcat/bin/startup.sh  && /bin/bash
+ENTRYPOINT  /opt/software/tomcat/bin/startup.sh
