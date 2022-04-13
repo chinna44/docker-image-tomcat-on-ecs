@@ -4,4 +4,4 @@ COPY ./index.html /usr/local/tomcat/webapps/ROOT/
 COPY ./target/giridhar.war /usr/local/tomcat/webapps/
 EXPOSE 8080
 RUN chmod +x /usr/local/tomcat/bin/catalina.sh
-ENTRYPOINT ["catalina.sh", "run"]
+ENTRYPOINT ["/usr/local/tomcat/bin/catalina.sh", "run"]
