@@ -1,14 +1,13 @@
 FROM centos:7
 MAINTAINER giridhar
-ENV VER 9.0.62
-RUN yum update -y \
-    && yum install java -y
-RUN  mkdir -p /opt/software
-WORKDIR /opt/software/
-ADD https://dlcdn.apache.org/tomcat/tomcat-9/v${VER}/bin/apache-tomcat-${VER}.tar.gz .
-RUN tar -xvzf apache-tomcat-${VER}.tar.gz \
-    && ln -s /opt/software/apache-tomcat-${VER} tomcat
-COPY ./index.html /opt/software/tomcat/webapps/ROOT/
-COPY ./target/giridhar.war /opt/software/tomcat/webapps/
+RUN mkdir /opt/tomcat/
+WORKDIR /opt/tomcat
+RUN curl -O https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.40/bin/apache-tomcat-8.5.40.tar.gz
+RUN tar xvfz apache*.tar.gz
+RUN mv apache-tomcat-8.5.40/* /opt/tomcat/.
+RUN yum -y install java
+RUN java -version
+COPY ./index.html /opt/tomcat/webapps/ROOT/
+COPY ./target/giridhar.war /opt/tomcat/webapps/
 EXPOSE 8080
 ENTRYPOINT  ["/opt/tomcat/bin/catalina.sh", "run"]
